@@ -6,7 +6,7 @@ app = Flask(__name__)
 # ✅ Put your NEW API key here
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key="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"
+    api_key="paste your api key"
 )
 
 @app.route("/")
