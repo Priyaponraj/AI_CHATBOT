@@ -2,7 +2,7 @@ from openai import OpenAI
 
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key="sk-or-v1-d......"  # paste your api key
+    api_key="paste your api key"
 )
 
 print("Chatbot (OpenRouter): type 'exit' to stop\n")
