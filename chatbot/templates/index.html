@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+        }
+        .chat-container {
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .chat-box {
+            height: 300px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .user { color: blue; }
+        .bot { color: green; }
+        input {
+            width: 70%;
+            padding: 10px;
+        }
+        button {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <h2>🤖 Chatbot</h2>
+
+    <div class="chat-box" id="chat-box"></div>
+
+    <input type="text" id="message" placeholder="Type message...">
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+function sendMessage() {
+    let message = document.getElementById("message").value;
+
+    if (message.trim() === "") return;
+
+    let chatBox = document.getElementById("chat-box");
+
+    // Show user message
+    chatBox.innerHTML += `<p class='user'><b>You:</b> ${message}</p>`;
+
+    fetch("/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: message })
+    })
+    .then(res => res.json())
+    .then(data => {
+        chatBox.innerHTML += `<p class='bot'><b>Bot:</b> ${data.reply}</p>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    })
+    .catch(err => {
+        chatBox.innerHTML += `<p class='bot'>⚠️ Error connecting to server</p>`;
+        console.log(err);
+    });
+
+    document.getElementById("message").value = "";
+}
+</script>
+
+</body>
+</html>
