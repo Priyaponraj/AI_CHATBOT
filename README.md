@@ -16,10 +16,10 @@ Technologies Used
 
 Project Structure
 chatbot/
-├──AI_CHATBOT.py
-├── app.py
-├── templates/
-   └── index.html
+   ├──AI_CHATBOT.py
+   ├── app.py
+   ├── templates/
+      └── index.html
 
 Installation
 1. Install dependencies
